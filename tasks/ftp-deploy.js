@@ -158,9 +158,11 @@ module.exports = function(grunt) {
 
     // Checking if we have all the necessary credentials before we proceed
     if (authVals == null || authVals.username == null || authVals.password == null) {
-      authVals.username = this.data.auth.username;
-      authVals.password = this.data.auth.password;
-      if (authVals == null || authVals.username == null || authVals.password == null) {
+      if (this.data.auth.username && this.data.auth.password) { 
+        authVals = {};
+        authVals.username = this.data.auth.username;
+        authVals.password = this.data.auth.password;
+      } else {
         grunt.warn('Username or Password not found!');
       }
     }
